@@ -1,26 +1,78 @@
 body {
+    font-family: 'Note Sans JP', sans-serif;
     font-size: 6em;
     text-align: center;
+    background-color: #f5f5f5;
+    padding: 40px 20px;
+    margin: 0;
 }
 
 .count {
-    margin: 0;
+    margin: 20px auto 0;
+    font-size: 0.8em;
     font-weight: bold;
-    color: #888;
+    color: #fff;
+    background: #4caf50;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 2);
 }
 
 .wrap {
-    margin-top: 20px;
-    padding: 80px 40px;
-    background-color: #666;
+    margin: 40px auto 0;
+    padding: 60px 40px;
+    background: #fff;
     font-weight: bold;
-    color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    font-size: 0.8em;
+    max-width: 900px;
+    color: #333;
 }
 
 .typed {
-    color: lightgreen;
+    color: #4caf50;
+}
+
+#untyped {
+    color: #888;
 }
 
 .mistyped {
-    background-color: red;
+    animation: shake 0.2s ease-in-out, flash 0.2s ease-in-out;
+}
+
+@keyframes flash {
+    0% {background-color: #ffd3d3;}
+    100% {background-color: #fff;}
+}
+
+@keyframes shake {
+    0%      {transform: translateX(0);}
+    25%     {transform: translateX(-5px);}
+    50%     {transform: translateX(5px);}
+    75%     {transform: translateX(-5px);}
+    100%    {transform: translateX(0px);}
+}
+
+#start {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 0.6em;
+    border-radius: 10px;
+    border: none;
+    background: #4caf50;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+}
+
+#start:hover {
+    background: #43a047;
+    transform: scale(1.05);
 }

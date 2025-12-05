@@ -44,34 +44,28 @@ const textLists = [
   "programming",
 ];
 
-// ランダムなテキストを表示
+// テキスト生成
 const createText = () => {
-  // 正タイプした文字列をクリア
+
   typed = "";
   typedfield.textContent = typed;
 
-  // 配列のインデックス数からランダムな数値を生成する
   let random = Math.floor(Math.random() * textLists.length);
-
-  // 配列からランダムにテキストを取得し画面に表示する
   untyped = textLists[random];
   untypedfield.textContent = untyped;
 };
 
-// キー入力の判定
+// キー入力処理
 const keyPress = (e) => {
-  // 誤タイプの場合
+
   if (e.key !== untyped.substring(0, 1)) {
     wrap.classList.add("mistyped");
-    // 100ms後に背景色を元に戻す
     setTimeout(() => {
       wrap.classList.remove("mistyped");
     }, 100);
     return;
   }
 
-  // 正タイプの場合
-  // スコアのインクリメント
   score++;
   wrap.classList.remove("mistyped");
   typed += untyped.substring(0, 1);
@@ -79,18 +73,16 @@ const keyPress = (e) => {
   typedfield.textContent = typed;
   untypedfield.textContent = untyped;
 
-  // テキストがなくなったら新しいテキストを表示
+
   if (untyped === "") {
     createText();
   }
 };
 
-// タイピングスキルのランクを判定
+// ランクを判定
 const rankCheck = (score) => {
-  // テキストを格納する変数を作る
   let text = "";
 
-  // スコアに応じて異なるメッセージを変数textに格納する
   if (score < 100) {
     text = `あなたのランクはCです。\nBランクまであと${100 - score}文字です。`;
   } else if (score < 200) {
@@ -101,33 +93,28 @@ const rankCheck = (score) => {
     text = `あなたのランクはSです。\nおめでとうございます!`;
   }
 
-  // 生成したメッセージと一緒に文字列を返す
   return `${score}文字打てました!\n${text}\n【OK】リトライ / 【キャンセル】終了`;
 };
 
-// ゲームを終了
+// ゲーム終了処理
 const gameOver = (id) => {
   clearInterval(id);
 
   const result = confirm(rankCheck(score));
 
-  // OKボタンをクリックされたらリロードする
   if (result == true) {
     window.location.reload();
   }
 };
 
-// カウントダウンタイマー
+// カウントダウン
 const timer = () => {
-  // タイマー部分のHTML要素（p要素）を取得する
   let time = count.textContent;
 
   const id = setInterval(() => {
-    // カウントダウンする
     time--;
     count.textContent = time;
 
-    // カウントが0になったらタイマーを停止する
     if (time <= 0) {
       gameOver(id);
     }
@@ -136,16 +123,10 @@ const timer = () => {
 
 // ゲームスタート時の処理
 start.addEventListener("click", () => {
-  // カウントダウンタイマーを開始する
   timer();
-
-  // ランダムなテキストを表示する
   createText();
 
-  // 「スタート」ボタンを非表示にする
   start.style.display = "none";
-
-  // キーボードのイベント処理
   document.addEventListener("keypress", keyPress);
 });
 
